@@ -8,22 +8,9 @@
       <h2 class="subtitle">
         My super Nuxt.js project
       </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <p>message: {{ message }}</p>
+      <p>reversed message: {{ reversedMessage }}</p>
+      <input type="text" v-model="message" />
     </div>
   </div>
 </template>
@@ -35,6 +22,19 @@ import Logo from '~/components/Logo.vue'
 export default Vue.extend({
   components: {
     Logo
+  },
+  computed: {
+    message: {
+      get() {
+         return this.$accessor.message
+      },
+      set(newMessage: string) {
+        this.$accessor.updateMessageAction(newMessage)
+      }
+    },
+    reversedMessage() {
+      return this.$accessor.reversedMessage
+    }
   }
 })
 </script>
